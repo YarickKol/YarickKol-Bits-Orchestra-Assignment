@@ -30,15 +30,51 @@ namespace ReadCSV_App.Controllers
             _appEnvironment = appEnvironment;
         }
 
-        public IActionResult Index()
-        {           
-                
-            //foreach (var employee in ReadCSVFile.ReadCSV(Path.GetFullPath(file.FileName)))
-            //{
-            //    _repository.CreateItem(employee);                
-            //}            
-               
-            return View(_repository.GetAllItems());
+        public IActionResult Index(string sortOrder)
+        {
+
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PhoneSortParm"] = sortOrder == "Phone" ? "phone_desc" : "Phone";
+            ViewData["SalarySortParm"] = sortOrder == "Salary" ? "salary_desc" : "Salary";
+            ViewData["MarriedSortParm"] = sortOrder == "Married" ? "married_desc" : "Married";
+            ViewData["BirthSortParm"] = sortOrder == "Birth" ? "birth_desc" : "Birth";
+            var li = from s in _repository.GetAllItems()
+                     select s;
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    li = li.OrderByDescending(s => s.Name);
+                    break;
+                case "Phone":
+                    li = li.OrderBy(s => s.Phone);
+                    break;
+                case "phone_desc":
+                    li = li.OrderByDescending(s => s.Phone);
+                    break;
+                case "Salary":
+                    li = li.OrderBy(s => s.Salary);
+                    break;
+                case "salary_desc":
+                    li = li.OrderByDescending(s => s.Salary);
+                    break;
+                case "Birth":
+                    li = li.OrderBy(s => s.DateOfBirth);
+                    break;
+                case "birth_desc":
+                    li = li.OrderByDescending(s => s.Phone);
+                    break;
+                case "Married":
+                    li = li.OrderBy(s => s.Married);
+                    break;
+                case "married_desc":
+                    li = li.OrderByDescending(s => s.Married);
+                    break;
+                default:
+                    li = li.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(li);
         }
 
         [HttpPost]

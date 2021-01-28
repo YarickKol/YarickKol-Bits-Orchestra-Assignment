@@ -99,19 +99,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"> <span class="glyphicon glyphicon-sort"> Name </span>  </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Married)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MarriedSortParm"]"> <span class="glyphicon glyphicon-sort"> Married </span>  </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfBirth)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["BirthSortParm"]"> <span class="glyphicon glyphicon-sort"> Date of birth </span>  </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PhoneSortParm"]"> <span class="glyphicon glyphicon-sort"> Phone </span>  </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Salary)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SalarySortParm"]"> <span class="glyphicon glyphicon-sort"> Salary </span>  </a>
             </th>
 
     </thead>
